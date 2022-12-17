@@ -1,3 +1,6 @@
+import sys
+
+
 def delta(i,j):
     return 1 if i == j else 0
 
@@ -8,14 +11,54 @@ def lm_alpha(p,q,r, i,j,k, l,m,n):
     return lm
 
 
-def lm_beta(p,q,r, i,j,k, l,m,n):
+def lm_beta_0(p,q,r, i,j,k, l,m,n):
     d = delta
     f1 = d(j,1) * ( d(k,l)*d(p,i)*d(q,m)*d(r,n) - d(m,i)*d(p,l)*d(q,k)*d(r,n) - d(n,i)*d(p,l)*d(q,m)*d(r,k) )
     f2 = d(k,1) * ( d(j,l)*d(p,i)*d(q,m)*d(r,n) - d(m,i)*d(p,l)*d(q,j)*d(r,n) - d(n,i)*d(p,l)*d(q,m)*d(r,j) )
     #print(f"f1={f1}")
     #print(f"f2={f2}")
-    lm = (f1 + f2) // 2
+    lm = f1 + f2
     return lm
+
+
+def lm_beta_sym(p,q,r, i,j,k, l,m,n):
+    
+    if q == r:
+        return lm_beta_0(p,q,r, i,j,k, l,m,n)
+    else:
+        return lm_beta_0(p,q,r, i,j,k, l,m,n) + lm_beta_0(p,r,q, i,j,k, l,m,n)
+    
+
+    return lm
+
+
+
+def lm_beta_v2(p,q,r, i,j,k, l,m,n):
+    d = delta
+    f1 = d(j,1) * ( d(k,l)*d(p,i)*d(q,m)*d(r,n) - d(m,i)*d(p,l)*d(q,k)*d(r,n) - d(n,i)*d(p,l)*d(q,m)*d(r,k) )
+    f2 = d(k,1) * ( d(j,l)*d(p,i)*d(q,m)*d(r,n) - d(m,i)*d(p,l)*d(q,j)*d(r,n) - d(n,i)*d(p,l)*d(q,m)*d(r,j) )
+    #print(f"f1={f1}")
+    #print(f"f2={f2}")
+    lm = (f1 + f2)
+
+    if q == r:
+        lm = lm * 2
+
+    if j == k:
+        lm = lm / 2
+    if m == n:
+        lm = lm / 2
+
+    #if lm != f1 + f2:
+    #    print(p,q,r, i,j,k, l,m,n)
+    #    print("f1+f2:", f1+f2)
+    #    print("lm:", lm)
+    #    sys.exit()
+
+    return lm
+
+lm_beta = lm_beta_sym
+
 
 
 def lm_gamma(p,q,r, i,j,k, l,m,n):
@@ -25,7 +68,7 @@ def lm_gamma(p,q,r, i,j,k, l,m,n):
     return lm
 
 
-def lm_v02(p,q,r, i,j,k, l,m,n):
+def lm_alpha_v02(p,q,r, i,j,k, l,m,n):
     d = delta
     if j == 1:
         return d(k,l)*d(p,i)*d(q,m)*d(r,n) - d(m,i)*d(p,l)*d(q,k)*d(r,n) - d(n,i)*d(p,l)*d(q,m)*d(r,k)
@@ -33,7 +76,7 @@ def lm_v02(p,q,r, i,j,k, l,m,n):
         return 0
 
 
-def lm_v01(p,q,r, i,j,k, l,m,n):
+def lm_alpha_v03(p,q,r, i,j,k, l,m,n):
     if j != 1:
         return 0
 
@@ -77,7 +120,21 @@ def lm_v01(p,q,r, i,j,k, l,m,n):
     return 0
 
 
-lm = lm_v02
+lm = lm_alpha
+
+
+"""
+DIM_WN = 6
+def mult_vectors(vec1, vec2):
+    output = np.zeros(DIM_WN)
+    for I in range(1, DIM_WN+1):
+        for L in range(1, DIM_WN+1):
+            k1 = vec[I]
+            k2 = vec[L]
+            vec = [lm3(P, I, L) for P in range(1, DIM_WN+1)]
+            output += np.array(vec)
+    return output
+"""
 
 
 if __name__ == "__main__":
@@ -99,3 +156,16 @@ if __name__ == "__main__":
             for r in [1,2]:
                 l = lm(p=p,q=q,r=r, i=2,j=1,k=1, l=2,m=1,n=2)
                 print("{}{}{}: l={}".format(p,q,r,l))
+
+    print()
+    print(lm_beta(2,1,1, 2,1,2, 2,1,1))
+
+    print()
+
+    """
+    DIM_WN = 6
+    for I in range(1,DIM_WN+1):
+        for L in range(1,DIM_WN+1):
+            vec = [lm3(P, I, L) for P in range(1,DIM_WN+1)]
+            print(f"e{I} * e{L} = {vec}")
+    """

@@ -1,26 +1,87 @@
 import numpy as np
+import re
 
-dim = 2
+size = 6
+
+def replace(x):
+
+    for i in range(x.shape[0]):
+        for j in range(x.shape[1]):
+            if type(x[i,j]) == str:
+                if len(x[i,j]) > 0:
+                    #print(i,j)
+                    #print(x[i,j])
+                    s = x[i,j]
+                    s = s.replace(r"x[6,3]", "a")
+                    s = s.replace(r"x[6,6]", "b")
+                    x[i,j] = s
+                    #print(s)
+    return x
 
 def create_array():
 
-    size = dim**3
-
     x = np.zeros((size+1, size+1), dtype=object)
 
-    x[7,7] = "a" 
-    x[8,8] = "b" 
+    x[6,3] = "x[6,3]"
+    x[6,6] = "x[6,6]"
 
-    x[2,2] = "a + b"
-    x[2,3] = "- a"
-    x[3,2] = "- a"
-    x[3,3] = "a + b"
-    x[4,4] = "2b"
-    x[5,5] = "- b"
-    x[6,6] = "a"
-    x[6,7] = "- a"
-    x[7,6] = "- a"
+    x[1,2] = "- 2x[6,3]"
+    x[2,2] = "x[6,6]"
+    x[2,3] = "- x[6,3]"
+    x[3,3] = "2x[6,6]"
+    x[4,1] = "x[6,3]"
+    x[4,4] = "- x[6,6]"
+    x[4,5] = "- 2x[6,3]"
+    x[5,2] = "x[6,3]"
+    x[5,6] = "- x[6,3]"
 
+    """
+    x[26,24] = "a"
+    x[26,26] = "b"
+    x[27,27] = "c"
+
+    x[2,2] = "b"
+    x[2,4] = "a"
+    x[3,3] = "- a + c"
+    x[3,7] = "a"
+    x[4,2] = "a"
+    x[4,4] = "b"
+    x[5,5] = "2a + 2b"
+    x[6,6] = "b + c"
+    x[6,8] = "a"
+    x[7,3] = "a"
+    x[7,7] = "- a + c"
+    x[8,6] = "a"
+    x[8,8] = "b + c"
+    x[9,9] = "2c"
+    x[10,10] = "- a - b"
+    x[11,11] = "- a"
+    x[11,13] = "a"
+    x[12,12] = "- 2a - b + c"
+    x[12,16] = "a"
+    x[13,11] = "a"
+    x[13,13] = "- a"
+    x[14,14] = "a + b"
+    x[15,15] = "- a + c"
+    x[15,17] = "a"
+    x[16,12] = "a"
+    x[16,16] = "- 2a - b + c"
+    x[17,15] = "a"
+    x[17,17] = "- a + c"
+    x[18,18] = "- a - b + 2c"
+    x[19,19] = "- c"
+    x[20,20] = "b - c"
+    x[20,22] = "a"
+    x[21,21] = "- a"
+    x[21,25] = "a"
+    x[22,20] = "a"
+    x[22,22] = "b - c"
+    x[23,23] = "2a + 2b - c"
+    x[24,24] = "b"
+    x[24,26] = "a"
+    x[25,21] = "a"
+    x[25,25] = "- a"
+    """
 
     return x
 
@@ -66,6 +127,9 @@ if __name__ == "__main__":
 
     # from create_matrix import create_array
     x = create_array()
+    x = replace(x)
+    import sys
+    #sys.exit()
     print(x)
     save_as_tex(x, "_matrix_out_as_tex_d2.txt")
     save_as_numpy(x, "_matrix_out_as_numpy_d2.txt")

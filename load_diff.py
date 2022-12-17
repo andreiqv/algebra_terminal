@@ -4,13 +4,12 @@ import numpy as np
 import re
 from transform_system import transform_system
 
-dim = 2
-#dim = 3
 
-N = dim
-index_range = list(range(1, dim + 1))
-irange = range(1, dim + 1)
-zero_vector = [0] * dim
+from indexation import N, dim, ind3to1, DIM_WN, map3indto1
+
+#index_range = list(range(1, dim + 1))
+#irange = range(1, dim + 1)
+#zero_vector = [0] * dim
 
 
 def load_data(path):
@@ -21,8 +20,8 @@ def load_data(path):
 
 
 def ind1to2(i):
-    i1 = i // dim**3 + 1
-    i2 = i % dim**3 + 1
+    i1 = i // DIM_WN + 1
+    i2 = i % DIM_WN + 1
     return (i1,i2)
 
 
@@ -33,9 +32,12 @@ def make_eq_system(data):
     rref0 = data.get("rref0")
     rref1 = data.get("rref1")
     #print(rref1)
-    num_d_ind = (dim**3)**2
+    #num_d_ind = (dim**3)**2
+    num_d_ind = DIM_WN**2
 
     all_indices = set(range(num_d_ind))
+    print("all_indices:", all_indices)
+    print("set(rref1):", set(rref1))
     indep = list(all_indices - set(rref1))
     indep.sort()
     print("indepedent:", indep)
@@ -69,6 +71,9 @@ def make_eq_system(data):
     print("indep:", indep)
     indep_str_list = ["x_({},{})".format(*ind1to2(i)) for i in indep]
     print(indep_str_list)
+    for i in indep:
+        print("x[{0},{1}] = \"x[{0},{1}]\"".format(*ind1to2(i)))
+    print()
 
     return eq_system, indep_str_list
 
@@ -76,9 +81,11 @@ def make_eq_system(data):
 if __name__ == "__main__":
 
     if dim == 2:
+        #path = "rref.txt"
         path = "rref_beta_dim2.txt"
         #path = "rref_alpha_dim2.txt"
     elif dim == 3:
+        #path = "rref.txt"
         path = "rref_beta_dim3.txt"
 
     data = load_data(path)
