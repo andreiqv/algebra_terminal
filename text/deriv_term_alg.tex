@@ -1,0 +1,274 @@
+% журнал Фундаментальная и прикладная математика
+\documentclass[a4paper,oneside,11pt]{amsart}
+\usepackage[left=1.7cm,right=1cm,top=1cm,bottom=1.7cm,bindingoffset=0cm]{geometry}
+\usepackage[russian]{babel}
+
+%\usepackage{literat}
+\usepackage{comment}
+\usepackage[all,arc]{xy}
+\usepackage[all]{xy}
+\usepackage{braket}
+\usepackage{latexsym,amssymb,amsmath}
+\usepackage{showkeys}
+\usepackage{hyperref}
+%\usepackage{style}
+
+\linespread{1.15}  % межстрочный интервал  (1.15 -- примерно 18pt)
+
+%\textwidth=16cm
+%\hoffset=-1cm
+%\textheight=23cm
+%\voffset=-1.5cm
+
+\usepackage{multirow}
+\usepackage{hhline}
+
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}{Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\newtheorem{problem}{Problem}
+\newtheorem{ques}{Question}
+\newtheorem{remark}{Remark}
+%\theoremstyle{definition}\newtheorem{exam}[definition]{Example}
+\newtheorem{fact}{Fact}
+\newtheorem{exam}{Example}
+
+%\newtheorem{theorem}{Теорема}[section]  % для диссера	
+%\theoremstyle{plain1}  % курсив
+%\newtheorem{prop}{Proposition}
+%\newtheorem{prop}[theorem]{Предложение}
+%\newtheorem{lemma}[theorem]{Лемма}
+%\newtheorem{cor}[theorem]{Следствие}
+%\newtheorem{conj}[theorem]{Гипотеза}
+%\newtheorem{ques}[theorem]{Вопрос}
+%\newtheorem{probl}[theorem]{Проблема}
+%\newtheorem{fact}[theorem]{Факт}
+%\newtheorem{stat}[theorem]{Утверждение} 
+%\renewcommand{\proofname}{Proof}
+
+% STYLE:
+
+\newcommand*{\Num}{\textnumero}  
+
+%\renewcommand*{\U}{\mathop{{\rm U}}\nolimits}
+\renewcommand{\O}{\mathop{\raisebox{0pt}{\rm O}}\nolimits}
+\newcommand{\OM}{\mathop{{\rm\Omega}}\nolimits}
+\newcommand{\POM}{\mathop{{\rm P\Omega}}\nolimits}
+\newcommand*{\GL}{\mathop{{\rm GL}}\nolimits}
+\newcommand*{\SL}{\mathop{{\rm SL}}\nolimits}
+\newcommand*{\GO}{\mathop{{\rm GO}}\nolimits}
+\newcommand*{\SO}{\mathop{{\rm SO}}\nolimits}
+\newcommand*{\CO}{\mathop{{\rm CO}}\nolimits}
+\newcommand*{\CSO}{\mathop{{\rm CSO}}\nolimits}
+\newcommand*{\SU}{\mathop{{\rm SU}}\nolimits}
+\newcommand*{\GU}{\mathop{{\rm GU}}\nolimits}
+\newcommand*{\Sp}{\mathop{{\rm Sp}}\nolimits}
+\newcommand*{\PGL}{\mathop{{\rm PGL}}\nolimits}
+\newcommand*{\PSL}{\mathop{{\rm PSL}}\nolimits}
+\newcommand*{\PSU}{\mathop{{\rm PSU}}\nolimits}
+\newcommand*{\PSO}{\mathop{{\rm PSO}}\nolimits}
+\newcommand*{\PSp}{\mathop{{\rm PSp}}\nolimits}
+\newcommand*{\CSp}{\mathop{{\rm CSp}}\nolimits}
+\newcommand*{\Syl}{\mathop{{\rm Syl}}\nolimits}
+\newcommand*{\Sz}{\mathop{{\rm Sz}}\nolimits}
+
+\newcommand*{\F}{\mathop{\mathbb{F}}\nolimits}
+\newcommand*{\Z}{\mathop{\mathbb{Z}}\nolimits}
+
+\newcommand*{\bsm}{\left(\begin{smallmatrix}}
+\newcommand*{\esm}{\end{smallmatrix}\right)}
+\newcommand*{\bp}{\begin{pmatrix}}
+\newcommand*{\ep}{\end{pmatrix}}
+\newcommand*{\bpm}{\begin{pmatrix}}
+\newcommand*{\epm}{\end{pmatrix}}
+\newcommand*{\bbm}{\begin{bmatrix}}
+\newcommand*{\ebm}{\end{bmatrix}}
+
+\newcommand*{\ov}{\overline}
+\renewcommand*{\iff}{~\Leftrightarrow~}
+\newcommand*{\then}{~\Rightarrow~}
+\newcommand*{\norm}{\triangleleft}   
+\newcommand*{\ideal}{\triangleleft}   
+%\newcommand*{\maxsubgroup}{\underset{\textrm{max}}{<}}  
+%\newcommand*{\maxnorm}{\underset{\textrm{max}}{\triangleleft}}  
+%\newcommand*{\mimnorm}{\underset{\textrm{min}}{\triangleleft}}  
+%\newcommand*{\semidir}{\leftthreetimes} 
+%\newcommand*{\semidr}{\mathbb{o}} 
+%\newcommand*{\inject}{\hookrightarrow}
+%\newcommand*{\mono}{\hookrightarrow} 
+%\newcommand*{\surject}{\twoheadrightarrow} 
+%\newcommand*{\epim}{\twoheadrightarrow} 
+
+\newcommand*{\xl}{\xleftarrow}
+\newcommand*{\xr}{\xrightarrow}
+
+\newcommand*{\al}{\alpha}
+\newcommand*{\be}{\beta}
+\newcommand*{\del}{\delta}
+\newcommand*{\eps}{\varepsilon}
+\newcommand*{\ga}{\gamma}
+\newcommand*{\Ga}{\Gamma}
+\newcommand*{\De}{\Delta}
+\newcommand*{\Del}{\Delta}
+\newcommand*{\lam}{\lambda}
+\newcommand*{\Lam}{\Lambda}
+\newcommand*{\om}{\omega}
+\newcommand*{\Om}{\Omega}
+\renewcommand*{\phi}{\varphi}
+\newcommand*{\sig}{\sigma}
+\newcommand*{\Sig}{\Sigma}
+\renewcommand*{\th}{\theta}
+
+\begin{document}
+\footskip=30pt
+\date{}
+%[\today]
+
+%title{Groups with Brauer trees having shape of a star}
+\title{derivations}
+\renewcommand{\baselinestretch}{1.2}
+
+
+\section{dim=2}
+
+\begin{verbatim}
+x[6,3] = "a"
+x[6,6] = "b"
+\end{verbatim}
+
+$\begin{smallmatrix}
+ 0 & - 2a & 0 & 0 & 0 & 0 \\
+ 0 & b & - a & 0 & 0 & 0 \\
+ 0 & 0 & 2b & 0 & 0 & 0 \\
+ a & 0 & 0 & - b & - 2a & 0 \\
+ 0 & a & 0 & 0 & 0 & - a \\
+ 0 & 0 & a & 0 & 0 & b \\
+\end{smallmatrix}$
+
+
+\section{dim=3}
+
+Denote
+
+$x_{15,17} =: a, ~~ x_{17,17} =: b, ~ x_{18,6} =: c, ~~
+x_{18,12} =: d, ~~ x_{18,17} =: e, ~ x_{18,18} =: f
+$.
+
+\vspace{10mm}
+
+$\begin{smallmatrix}
+ 0 & 2a & - 2c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & b & - d & a & - c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & f & 0 & a & - c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 2b & - 2d & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & b + f & - d & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & e & 2f & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ - a & 0 & 0 & 0 & 0 & 0 & - b & 2a & - 2c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & - a & 0 & 0 & 0 & 0 & 0 & 0 & - d & a & - c & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & - b + f & 0 & a & - c & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & b & - 2d & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & f & - d & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & e & - b + 2f & 0 & 0 & 0 & 0 & 0 & 0 \\
+ c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & - f & 2a & - 2c & 0 & 0 & 0 \\
+ 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & b - f & - d & a & - c & 0 \\
+ 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & 0 & 0 & a & - c \\
+ 0 & 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & 2b - f & - 2d & 0 \\
+ 0 & 0 & 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & b & - d \\
+ 0 & 0 & 0 & 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & e & f \\
+\end{smallmatrix}$
+
+\vspace{10mm}
+indices 1,2:
+$\begin{smallmatrix}
+ 0 & a & a & 0 & 0 & 0 & 0 & 0 \\
+ 0 & b & 0 & a & 0 & 0 & 0 & 0 \\
+ 0 & 0 & b & a & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 2b & 0 & 0 & 0 & 0 \\
+ - a & 0 & 0 & 0 & - b & a & a & 0 \\
+ 0 & - a & 0 & 0 & 0 & 0 & 0 & a \\
+ 0 & 0 & - a & 0 & 0 & 0 & 0 & a \\
+ 0 & 0 & 0 & - a & 0 & 0 & 0 & b 
+\end{smallmatrix}$
+
+\vspace{10mm}
+
+indices 1,3:
+$\begin{smallmatrix}
+ 0 & - c & - c & 0 & 0 & 0 & 0 & 0 \\
+ 0 & f & 0 & - c & 0 & 0 & 0 & 0 \\
+ 0 & 0 & f & - c & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 2f & 0 & 0 & 0 & 0 \\
+ c & 0 & 0 & 0 & - f & - c & - c & 0 \\
+ 0 & c & 0 & 0 & 0 & 0 & 0 & - c \\
+ 0 & 0 & c & 0 & 0 & 0 & 0 & - c \\
+ 0 & 0 & 0 & c & 0 & 0 & 0 & f
+\end{smallmatrix}$
+
+\vspace{10mm}
+
+indices 2,3:
+$\begin{smallmatrix}
+ b & - d & - d & 0 & - e & 0 & 0 & 0 \\
+ e & f & 0 & - d & 0 & - e & 0 & 0 \\
+ e & 0 & f & - d & 0 & 0 & - e & 0 \\
+ 0 & e & e & - b + 2f & 0 & 0 & 0 & - e \\
+ d & 0 & 0 & 0 & 2b - f & - d & - d & 0 \\
+ 0 & d & 0 & 0 & e & b & 0 & - d \\
+ 0 & 0 & d & 0 & e & 0 & b & - d \\
+ 0 & 0 & 0 & d & 0 & e & e & f
+\end{smallmatrix}$
+
+
+\vspace{10mm}
+Non-zero elements:\\
+
+$x[2,2] = b$,\\
+$x[2,4] = a$,\\
+$x[3,3] = - a + c$,\\
+$x[3,7] = a$,\\
+$x[4,2] = a$,\\
+$x[4,4] = b$,\\
+$x[5,5] = 2a + 2b$,\\
+$x[6,6] = b + c$,\\
+$x[6,8] = a$,\\
+$x[7,3] = a$,\\
+$x[7,7] = - a + c$,\\
+$x[8,6] = a$,\\
+$x[8,8] = b + c$,\\
+$x[9,9] = 2c$,\\
+$x[10,10] = - a - b$,\\
+$x[11,11] = - a$,\\
+$x[11,13] = a$,\\
+$x[12,12] = - 2a - b + c$,\\
+$x[12,16] = a$,\\
+$x[13,11] = a$,\\
+$x[13,13] = - a$,\\
+$x[14,14] = a + b$,\\
+$x[15,15] = - a + c$,\\
+$x[15,17] = a$,\\
+$x[16,12] = a$,\\
+$x[16,16] = - 2a - b + c$,\\
+$x[17,15] = a$,\\
+$x[17,17] = - a + c$,\\
+$x[18,18] = - a - b + 2c$,\\
+$x[19,19] = - c$,\\
+$x[20,20] = b - c$,\\
+$x[20,22] = a$,\\
+$x[21,21] = - a$,\\
+$x[21,25] = a$,\\
+$x[22,20] = a$,\\
+$x[22,22] = b - c$,\\
+$x[23,23] = 2a + 2b - c$,\\
+$x[24,24] = b$,\\
+$x[24,26] = a$,\\
+$x[25,21] = a$,\\
+$x[25,25] = - a$,\\
+
+
+
+
+\end{document} 
