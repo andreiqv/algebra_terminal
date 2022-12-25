@@ -2,6 +2,15 @@
 lower indices for alpha
 
 alpha_{ijk} * alpha_{lmn} = sum_{pqr} lambda^{pqr}_{ijklmn} alpha_{pqr}
+
+
+fro dim=4:
+2022-12-14 03:14:59.532094
+arr shape: (29524, 1600)
+2022-12-14 10:26:05.115799
+rank(A): 1588
+2022-12-14 10:27:33.451289
+
 """
 
 import sys
@@ -11,10 +20,10 @@ import numpy as np
 from numpy import linalg
 #from mult_table import lm_alpha as lm  # for alpha
 from mult_table import lm_beta as lm   # for beta+
+from indexation import N, dim, ind3to1, map3to1, map1to3, lm3
 
-dim = 3
-
-N = dim
+#dim = 2
+#N = dim
 index_range = list(range(1, dim + 1))
 irange = range(1, dim + 1)
 zero_vector = [0] * dim
@@ -22,6 +31,12 @@ zero_vector = [0] * dim
 DEBUG = False
 
 #print("zero_vector:", zero_vector)
+DIM_WN = int(N**2 * (N+1) / 2)
+
+print("DIM(W_N):", DIM_WN)
+
+Irange = range(1, DIM_WN + 1)
+print(list(Irange))
 
 
 def delta(i,j):
@@ -32,97 +47,96 @@ def aa(k,i,j,t,m,n):
     """
     return delta(k,t)*delta(i,m)*delta(j,n)
 
-
 INDEXATION = 1
 
 
-def get_eq_str(i,j,k, l,m,n, p,q,r):
+#def ind3to1(i,j,k):
+#    return (i-1)*(N**2) + (j-1)*N + (k-1)*1 + 1
+
+
+
+
+def  get_eq_str_3ind(I, L, P):
 
     eq_str = ""
     flag = False
-    A = [0] * ((dim**3) ** 2)
+    A = [0] * (DIM_WN ** 2)
 
-    for s in irange:
-        for t in irange:
-            for u in irange:
+    for S in Irange:
 
-                l1 = lm(p,q,r, s,t,u, l,m,n)
-                l2 = lm(p,q,r, i,j,k, s,t,u)
-                l3 = lm(s,t,u, i,j,k, l,m,n)
+        l1 = lm3(P, S, L)
+        l2 = lm3(P, I, S)
+        l3 = lm3(S, I, L)
 
-                if INDEXATION == 3:
+        s1 = "({})*d{}u{}".format(l1, S, I)
+        s2 = "({})*d{}u{}".format(l2, S, L)
+        s3 = "({})*d{}u{}".format(l3, P, S)
 
-                    s1 = "({})*d{}{}{}{}{}{}".format(l1, s,t,u, i,j,k)
-                    s2 = "({})*d{}{}{}{}{}{}".format(l2, s,t,u, l,m,n)
-                    s3 = "({})*d{}{}{}{}{}{}".format(l3, p,q,r, s,t,u)
-                
-                else:
+        #index1_d = DIM_WN * (I - 1) + (S - 1)
+        #index2_d = DIM_WN * (L - 1) + (S - 1)
+        #index3_d = DIM_WN * (S - 1) + (P - 1)
+        index1_d = DIM_WN * (S - 1) + (I - 1)
+        index2_d = DIM_WN * (S - 1) + (L - 1)
+        index3_d = DIM_WN * (P - 1) + (S - 1)
 
-                    index1_d = dim**3 * (ind3to1(i,j,k) - 1) + (ind3to1(s,t,u) - 1)
-                    index2_d = dim**3 * (ind3to1(l,m,n) - 1) + (ind3to1(s,t,u) - 1)
-                    index3_d = dim**3 * (ind3to1(s,t,u) - 1) + (ind3to1(p,q,r) - 1)
-                    
-                    #print(len(A), index1_d, index2_d, index3_d)
-                    A[index1_d] += l1
-                    A[index2_d] += l2
-                    A[index3_d] -= l3
+        # Then, to get matrix indices, we will use i1 = i // DIM_WN + 1, i2 = i % DIM_WN + 1
 
-                    if l1 != 0 or l2 != 0 or l3 != 0:
-                        flag = True
+        #print(len(A), index1_d, index2_d, index3_d)
+        A[index1_d] += l1
+        A[index2_d] += l2
+        A[index3_d] -= l3
 
-                #print("{} {} {}".format(s1, s2, s3))
-                #substr = "+ {} + {} - {}".format(s1, s2, s3)
+        if l1 != 0 or l2 != 0 or l3 != 0:
+            flag = True
 
-    if len(eq_str) > 0 or flag:
+        #print("{} {} {}".format(s1, s2, s3))
+        eq_str += "+ {} + {} - {}".format(s1, s2, s3)
+
+    if len(eq_str) > 0 and flag:
         str_result = eq_str + " == 0 &&"
-        return {'array': A, 'string': str_result}
+        return {'array': A, 'string': str_result, 'empty': False}
     else:
-        #return {'array': A}
-        return None
+        return {'array': A, 'empty': True} #return None
 
 
 def gen_eq_system():
     """
     Returns a list of coeff for one eq. and a string for one eq.
     """
-
     outstr = ""
     eq_list = []
     arr_list = []
 
-    SAVE_EQ_SYS_TO_FILE = False  # for Wolfram Mathematica
+    SAVE_EQ_SYS_TO_FILE = True  # for Wolfram Mathematica
     if SAVE_EQ_SYS_TO_FILE:
         fp = open("_out_equations.txt", "wt")
 
-    for i in irange:
-        for j in irange:
-            for k in irange:
+    count = 0
 
-                for l in irange:
-                    for m in irange:
-                        for n in irange:
+    for I in Irange:
+        for L in Irange:
+            for P in Irange:
 
-                            for p in irange:
-                                for q in irange:
-                                    for r in irange:
+                print("I,L,P:", I,L,P)
 
-                                        result = get_eq_str(i,j,k, l,m,n, p,q,r)
-                                        if result:
-                                            A = result.get('array')
-                                            eq_str = result.get('string')
-                                            arr_list.append(A)
+                result = get_eq_str_3ind(I, L, P)
+                if not result.get('empty'):
+                    A = result.get('array')
+                    eq_str = result.get('string')
+                    arr_list.append(A)
 
-                                            if SAVE_EQ_SYS_TO_FILE:
-                                                print(A)
-                                                print(eq_str)
-                                                fp.write("{}\n".format(eq_str))
-                                                eq_list.append(eq_str)
+                    if SAVE_EQ_SYS_TO_FILE:
+                        #print(A)
+                        #print(eq_str)
+                        fp.write("{}\n".format(eq_str))
+                        eq_list.append(eq_str)
+                        #print("SAVED")
+
+                #print("count:", count)
+                count += 1
 
     return eq_list, arr_list
 
-
-def ind3to1(i,j,k):
-    return (i-1)*(N**2) + (j-1)*N + (k-1)*1 + 1
 
 
 # from diff_array import gen_eq_system
@@ -134,6 +148,8 @@ def generate_eq_system():
 
     eq_list, arr_list = gen_eq_system()
     arr = np.array(arr_list)
+    print("arr shape:", arr.shape)
+    #sys.exit()
 
     #b = np.zeros(arr.shape[0])
     #bt = b.reshape(-1,1)
@@ -183,15 +199,26 @@ def calc():
     for p in [1,2]:
         for q in [1,2]:
             for r in [1,2]:
+                if q > r:
+                    continue
                 l = lm(p=p,q=q,r=r, i=2,j=1,k=1, l=1,m=2,n=2)
                 print("{}{}{}: l={}".format(p,q,r,l))
 
-    #sys.exit()
+    print("Test mult table:")
+    for I in range(1,DIM_WN+1):
+        ind3 = map1to3[I]
+        print(f"{I}: {ind3}")
+    print()
+
+    for I in range(1, DIM_WN+1):
+        for L in range(1, DIM_WN+1):
+            vec = [lm3(P, I, L) for P in range(1,DIM_WN+1)]
+            print(f"e{I} * e{L} = {vec}")
 
     print()
     print(datetime.now())
     A = generate_eq_system()
-    print("num elements:", (dim**3)**2)
+    #print("(N^3)^2 =", (dim**3)**2)
     print(datetime.now())
     print("rank(A):", linalg.matrix_rank(A))
     print(datetime.now())
@@ -205,14 +232,16 @@ def calc():
     bt = b.reshape(-1,1)
     A1 = np.concatenate((A, bt), axis=1) # extension matrix
 
+    #sys.exit()
+
     from sympy import Matrix
     t1 = datetime.now()
     M1 = Matrix(A1)
     t2 = datetime.now()
     rref = M1.rref()
     #rr = M1.rref()
-    print("rref:")
-    print(rref)
+    #print("rref:")
+    #print(rref)
     t3 = datetime.now()
     print("t1:", t1)
     print("t2:", t2)
@@ -232,9 +261,15 @@ def calc():
     with open("rref.txt", "wt") as outfp:
         json.dump(outdata, outfp)
 
+    print("A shape:", A.shape)
+
     return rref
 
 if __name__ == "__main__":
 
     rref = calc()
 
+    for i in range(1,DIM_WN+1):
+        for j in range(1,DIM_WN+1):
+            print(f"d{i}u{j}, ", end="")
+    print()

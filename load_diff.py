@@ -85,8 +85,8 @@ if __name__ == "__main__":
         path = "rref_beta_dim2.txt"
         #path = "rref_alpha_dim2.txt"
     elif dim == 3:
-        #path = "rref.txt"
-        path = "rref_beta_dim3.txt"
+        path = "rref.txt"
+        #path = "rref_beta_dim3.txt"
 
     data = load_data(path)
 
