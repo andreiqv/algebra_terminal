@@ -20,7 +20,8 @@ import numpy as np
 from numpy import linalg
 #from mult_table import lm_alpha as lm  # for alpha
 from mult_table import lm_beta as lm   # for beta+
-from indexation import N, dim, ind3to1, map3to1, map1to3, lm3
+from indexation import N, DIM_WN, dim, ind3to1, map3to1, map1to3, lm3
+from indexation import ind2to1, ind1to2
 
 #dim = 2
 #N = dim
@@ -29,11 +30,9 @@ irange = range(1, dim + 1)
 zero_vector = [0] * dim
 
 DEBUG = False
-
 #print("zero_vector:", zero_vector)
-DIM_WN = int(N**2 * (N+1) / 2)
-
-print("DIM(W_N):", DIM_WN)
+#DIM_WN = int(N**2 * (N+1) / 2)
+#print("DIM(W_N):", DIM_WN)
 
 Irange = range(1, DIM_WN + 1)
 print(list(Irange))
@@ -75,9 +74,16 @@ def  get_eq_str_3ind(I, L, P):
         #index1_d = DIM_WN * (I - 1) + (S - 1)
         #index2_d = DIM_WN * (L - 1) + (S - 1)
         #index3_d = DIM_WN * (S - 1) + (P - 1)
-        index1_d = DIM_WN * (S - 1) + (I - 1)
-        index2_d = DIM_WN * (S - 1) + (L - 1)
-        index3_d = DIM_WN * (P - 1) + (S - 1)
+        
+        # reverse version:
+        #index1_d = DIM_WN * (S - 1) + (I - 1)
+        #index2_d = DIM_WN * (S - 1) + (L - 1)
+        #index3_d = DIM_WN * (P - 1) + (S - 1)
+
+        index1_d = ind2to1(S, I)
+        index2_d = ind2to1(S, L)
+        index3_d = ind2to1(P, S)
+
 
         # Then, to get matrix indices, we will use i1 = i // DIM_WN + 1, i2 = i % DIM_WN + 1
 

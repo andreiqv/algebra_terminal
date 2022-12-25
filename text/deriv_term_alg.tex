@@ -133,7 +133,26 @@
 \renewcommand{\baselinestretch}{1.2}
 
 
+Denote $\beta_L := \beta^i_{jk}$, 
+
+where correspondence between $L$ and $ijk$:
+
+$L=1$ --- $(ijk) = (1,1,1)$,
+
+$L=2$ --- $(ijk) = (1,1,2)$,
+
+$L=3$ --- $(ijk) = (1,2,2)$,
+
+$L=4$ --- $(ijk) = (2,1,1)$,
+
+$L=5$ --- $(ijk) = (2,1,2)$,
+
+$L=6$ --- $(ijk) = (2,2,2)$,
+
+
 \section{dim=2}
+
+If $D(\beta_L) = \sum\limits_{S} d^S_L \beta_S = \sum\limits_{S} d_{LS} \beta_S$ (where $1 \leq L,S \leq 6$), then
 
 \begin{verbatim}
 x[6,3] = "a"
@@ -149,8 +168,27 @@ $\begin{smallmatrix}
  0 & 0 & a & 0 & 0 & b \\
 \end{smallmatrix}$
 
+\vspace{5mm}
+
+If $D(\beta_L) = \sum\limits_{S} d^S_L \beta_S = \sum\limits_{S} d_{SL} \beta_S$, then
+\begin{verbatim}
+x[6,5] = "a"
+x[6,6] = "b"
+\end{verbatim}
+$\begin{smallmatrix}
+ 0 & 0 & 0 & - a & 0 & 0 \\
+ 2a & b & 0 & 0 & - a & 0 \\
+ 0 & a & 2b & 0 & 0 & - a \\
+ 0 & 0 & 0 & - b & 0 & 0 \\
+ 0 & 0 & 0 & 2a & 0 & 0 \\
+ 0 & 0 & 0 & 0 & a & b \\
+\end{smallmatrix}$
+
+
 
 \section{dim=3}
+
+If $D(\beta_L) = \sum\limits_{S} d^S_L \beta_S = \sum\limits_{S} d_{LS} \beta_S$, then
 
 Denote
 
@@ -217,9 +255,74 @@ $\begin{smallmatrix}
 \end{smallmatrix}$
 
 
-\vspace{10mm}
-Non-zero elements:\\
+\newpage
 
+If $D(\beta_L) = \sum\limits_{S} d^S_L \beta_S = \sum\limits_{S} d_{SL} \beta_S$, then
+
+
+Denote
+
+$x_{15,17} =: a, ~~ x_{17,17} =: b, ~ x_{18,6} =: c, ~~
+x_{18,12} =: d, ~~ x_{18,17} =: e, ~ x_{18,18} =: f
+$.
+
+\vspace{10mm}
+
+$\begin{smallmatrix}
+ 0 & 2a & - 2c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & b & - d & a & - c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & f & 0 & a & - c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 2b & - 2d & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & b + f & - d & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & e & 2f & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ - a & 0 & 0 & 0 & 0 & 0 & - b & 2a & - 2c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & - a & 0 & 0 & 0 & 0 & 0 & 0 & - d & a & - c & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & - b + f & 0 & a & - c & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & b & - 2d & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & f & - d & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & e & - b + 2f & 0 & 0 & 0 & 0 & 0 & 0 \\
+ c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & - f & 2a & - 2c & 0 & 0 & 0 \\
+ 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & b - f & - d & a & - c & 0 \\
+ 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & 0 & 0 & a & - c \\
+ 0 & 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & 2b - f & - 2d & 0 \\
+ 0 & 0 & 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & b & - d \\
+ 0 & 0 & 0 & 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & e & f \\
+\end{smallmatrix}$
+
+\vspace{10mm}
+indices 1,2:
+$\begin{smallmatrix}
+ 0 & 2a & 0 & 0 & 0 & 0 \\
+ 0 & b & a & 0 & 0 & 0 \\
+ 0 & 0 & 2b & 0 & 0 & 0 \\
+ - a & 0 & 0 & - b & 2a & 0 \\
+ 0 & - a & 0 & 0 & 0 & a \\
+ 0 & 0 & - a & 0 & 0 & b \\
+\end{smallmatrix}$
+
+\vspace{10mm}
+
+indices 1,3:
+$\begin{smallmatrix}
+ 0 & - 2c & 0 & 0 & 0 & 0 \\
+ 0 & f & - c & 0 & 0 & 0 \\
+ 0 & 0 & 2f & 0 & 0 & 0 \\
+ c & 0 & 0 & - f & - 2c & 0 \\
+ 0 & c & 0 & 0 & 0 & - c \\
+ 0 & 0 & c & 0 & 0 & f \\
+\end{smallmatrix}$
+
+\vspace{10mm}
+
+indices 2,3:
+$\begin{smallmatrix}
+ b & - 2d & 0 & 0 & 0 & 0 \\
+ 0 & f & - d & 0 & 0 & 0 \\
+ 0 & e & - b + 2f & 0 & 0 & 0 \\
+ d & 0 & 0 & 2b - f & - 2d & 0 \\
+ 0 & d & 0 & 0 & b & - d \\
+ 0 & 0 & d & 0 & e & f \\
+\end{smallmatrix}$
 
 
 

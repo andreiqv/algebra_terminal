@@ -29,6 +29,7 @@ def get_matrix(a,b,c,d,e,f):
         [ 0 , 0 , 0 , 0 , 0 , c , 0 , 0 , 0 , 0 , 0 , d , 0 , 0 , 0 , 0 , e , f ],
     ])
     return X
+    #return X.transpose()
 
 
 def print_matrix(A):
@@ -68,8 +69,8 @@ if __name__ == "__main__":
     #V = com(C,E)
     #print(V)
 
-    M1 = A
-    M2 = B
+    M1 = C
+    M2 = E
     print("M1:\n", M1)
     print("M2:\n", M2)
     print("M1*M2:\n", M1*M2)
@@ -77,7 +78,7 @@ if __name__ == "__main__":
 
     V = com(M1,M2)
     print("M1*M2-M2*M1:", V)
-    sys.exit()
+    #sys.exit()
 
     print("A*B=A",(com(A,B) == A).all())
     print("A*C=0",(com(A,C) == Z).all())

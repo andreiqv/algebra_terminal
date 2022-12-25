@@ -21,6 +21,7 @@ from numpy import linalg
 #from mult_table import lm_alpha as lm  # for alpha
 from mult_table import lm_beta as lm   # for beta+
 from indexation import N, dim, ind3to1, map3to1, map1to3, lm3
+from indexation import ind2to1, ind1to2
 
 #dim = 2
 #N = dim
@@ -72,9 +73,15 @@ def  get_eq_str_3ind(I, L, P):
         s2 = "({})*d{}u{}".format(l2, S, L)
         s3 = "({})*d{}u{}".format(l3, P, S)
 
-        index1_d = DIM_WN * (I - 1) + (S - 1)
-        index2_d = DIM_WN * (L - 1) + (S - 1)
-        index3_d = DIM_WN * (S - 1) + (P - 1)
+        index1_d = ind2to1(I, S)
+        index2_d = ind2to1(L, S)
+        index3_d = ind2to1(S, P)
+
+        #index1_d = DIM_WN * (I - 1) + (S - 1)
+        #index2_d = DIM_WN * (L - 1) + (S - 1)
+        #index3_d = DIM_WN * (S - 1) + (P - 1)
+        
+        # reverse version:
         #index1_d = DIM_WN * (S - 1) + (I - 1)
         #index2_d = DIM_WN * (S - 1) + (L - 1)
         #index3_d = DIM_WN * (P - 1) + (S - 1)

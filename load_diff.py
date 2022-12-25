@@ -5,11 +5,14 @@ import re
 from transform_system import transform_system
 
 
-from indexation import N, dim, ind3to1, DIM_WN, map3indto1
+from indexation import N, dim, ind3to1, DIM_WN
+from indexation import ind2to1, ind1to2
 
 #index_range = list(range(1, dim + 1))
 #irange = range(1, dim + 1)
 #zero_vector = [0] * dim
+
+print("DIM_WN:", DIM_WN)
 
 
 def load_data(path):
@@ -19,11 +22,12 @@ def load_data(path):
     return data
 
 
+"""
 def ind1to2(i):
     i1 = i // DIM_WN + 1
     i2 = i % DIM_WN + 1
     return (i1,i2)
-
+"""
 
 def make_eq_system(data):
 
@@ -82,10 +86,12 @@ if __name__ == "__main__":
 
     if dim == 2:
         #path = "rref.txt"
-        path = "rref_beta_dim2.txt"
+        #path = "rref_beta_dim2.txt"
+        path = "rref_beta_dim2_reverse.txt"
         #path = "rref_alpha_dim2.txt"
     elif dim == 3:
-        path = "rref.txt"
+        #path = "rref.txt"
+        path = "rref_beta_dim3_reverse.txt"
         #path = "rref_beta_dim3.txt"
 
     data = load_data(path)
