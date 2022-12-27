@@ -204,16 +204,30 @@ if __name__ == "__main__":
     save_as_tex(x, "_matrix_out_as_tex_d3.txt")
     save_as_numpy(x, "_matrix_out_as_numpy_d3.txt")
 
+    # For W_N
+    #subindices = [0,1,2,4,7,8,10] # (1,2)
+    #a = x[subindices,:][:,subindices]
+    #save_as_tex(a, "_r_matrix_out_as_tex_ver2_1-2.txt")
+
+    subindices = [0,1,3,6,13,15,18]  # (1,3)
+    a = x[subindices,:][:,subindices]
+    save_as_tex(a, "_r_matrix_out_as_tex_ver2_1-3.txt")
+
+    #subindices = [0,14,15,17,18,23,24,26,27]  # (2,3)
+    #a = x[subindices,:][:,subindices]
+    #save_as_tex(a, "_r_matrix_out_as_tex_ver2_2-3.txt")
+
     """
+    # Full W(N)
     subindices = [0,1,2,4,5,10,11,13,14] # (1,2)
     a = x[subindices,:][:,subindices]
-    save_as_tex(a, "_matrix_out_as_tex_ver2_1-2.txt")
+    save_as_tex(a, "_r_matrix_out_as_tex_ver2_1-2.txt")
 
     subindices = [0,1,3,7,9,19,21,25,27]  # (1,3)
     a = x[subindices,:][:,subindices]
-    save_as_tex(a, "_matrix_out_as_tex_ver2_1-3.txt")
+    save_as_tex(a, "_r_matrix_out_as_tex_ver2_1-3.txt")
 
     subindices = [0,14,15,17,18,23,24,26,27]  # (2,3)
     a = x[subindices,:][:,subindices]
-    save_as_tex(a, "_matrix_out_as_tex_ver2_2-3.txt")
+    save_as_tex(a, "_r_matrix_out_as_tex_ver2_2-3.txt")
     """

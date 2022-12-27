@@ -69,13 +69,21 @@ def  get_eq_str_3ind(I, L, P):
         l2 = lm3(P, I, S)
         l3 = lm3(S, I, L)
 
-        s1 = "({})*d{}u{}".format(l1, S, I)
-        s2 = "({})*d{}u{}".format(l2, S, L)
-        s3 = "({})*d{}u{}".format(l3, P, S)
-
         index1_d = ind2to1(I, S)
         index2_d = ind2to1(L, S)
         index3_d = ind2to1(S, P)
+
+        if INDEXATION == 1:
+            s1 = "({})*d{}".format(l1,index1_d)
+            s2 = "({})*d{}".format(l2,index2_d)
+            s3 = "({})*d{}".format(l3,index3_d)
+        else:
+            s1 = "({})*d{}u{}".format(l1, S, I)
+            s2 = "({})*d{}u{}".format(l2, S, L)
+            s3 = "({})*d{}u{}".format(l3, P, S)
+            #s1 = "({})*d{}u{}".format(l1, S, I)
+            #s2 = "({})*d{}u{}".format(l2, S, L)
+            #s3 = "({})*d{}u{}".format(l3, P, S)
 
         #index1_d = DIM_WN * (I - 1) + (S - 1)
         #index2_d = DIM_WN * (L - 1) + (S - 1)
@@ -229,7 +237,8 @@ def calc():
     print(datetime.now())
     print("rank(A):", linalg.matrix_rank(A))
     print(datetime.now())
-    #sys.exit()
+    sys.exit()
+
     
     #num_eq = A.shape[0]
     #b = np.zeros(num_eq)

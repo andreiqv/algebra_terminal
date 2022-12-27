@@ -123,6 +123,8 @@
 \newcommand*{\Sig}{\Sigma}
 \renewcommand*{\th}{\theta}
 
+\renewcommand*{\d}{\delta}
+
 \begin{document}
 \footskip=30pt
 \date{}
@@ -132,8 +134,56 @@
 \title{derivations}
 \renewcommand{\baselinestretch}{1.2}
 
+\section{Terminal algebra $W_N$}
 
-Denote $\beta_L := \beta^i_{jk}$, 
+
+Denote $\beta^i_{jk} := \alpha^i_{jk} + \alpha^i_{kj}$.
+
+\vspace{2mm}
+
+Then $\{ \beta^i_{jk} ~|~ j \leq k\}$ is a basis of $W_N$, and $\text{dim} W_N = N^2 + \frac{N^3 - N^2}{2} = \frac{1}{2}N^2 (N+1)$.
+
+The multiplication table of $W_N$ is the following
+
+\vspace{2mm}
+
+$
+\beta^i_{jk} \cdot \beta^l_{mn} =
+\delta_{j1} ( \delta_{kl} \beta^i_{mn} -  \delta_{mi} \beta^l_{kn} -  \beta_{ni} \beta^l_{mk}) 
++ \delta_{k1} ( \delta_{jl} \beta^i_{mn} -  \delta_{mi} \beta^l_{jn} -  \beta_{ni} \beta^l_{mj}).
+$
+
+\vspace{3mm}
+
+If
+$\be_{ijk} \cdot \be_{lmn} = \sum\limits_{pqr} \lambda^{pqr}_{ijklmn} \be_{pqr}$,
+
+then
+
+$\lambda^{pqr}_{ijklmn} = \tilde{\lambda}^{pqr}_{ijklmn}$ if $q=r$,
+
+and $\lambda^{pqr}_{ijklmn} = \tilde{\lambda}^{pqr}_{ijklmn} + \tilde{\lambda}^{prq}_{ijklmn}
+= 2 \tilde{\lambda}^{pqr}_{ijklmn} $ if $q \neq r$,
+
+where
+
+$\tilde{\lambda}^{pqr}_{ijklmn} 
+= \d_{j1} (\d_{kl} \d_{pi} \d_{qm} \d_{rn}
+- \d_{mi} \delta_{pl} \d_{qk} \d_{rn}
+- \d_{ni} \d_{pl} \d_{qm} \d_{rk})
++ \d_{k1} (\d_{jl} \d_{pi} \d_{qm} \d_{rn}
+- \d_{mi} \d_{pl} \d_{qj} \d_{rn}
+- \d_{ni} \d_{pl} \d_{qm} \d_{rj}).
+$
+
+\vspace{3mm}
+
+i.e. $\lambda^{pqr}_{ijklmn} = (2 - \d_{qr}) \tilde{\lambda}^{pqr}_{ijklmn}$.
+
+
+\subsection{Algebra of derivations}
+
+Denote $\beta_L := \beta_{ijk} = \beta^i_{jk}$, 
 
 where correspondence between $L$ and $ijk$:
 
@@ -149,6 +199,19 @@ $L=5$ --- $(ijk) = (2,1,2)$,
 
 $L=6$ --- $(ijk) = (2,2,2)$,
 
+\vspace{5mm}
+
+Let $D(\be_L) = \sum\limits_S d^S_L \be_S$, and  $\be_I \cdot \be_L = \sum\limits_P \lambda^P_{IL} \be_P$, where $\lambda^P_{IL} := \lambda^{pqr}_{ijklmn}$.
+
+\vspace{2mm}
+
+It follows from $D(\be_I) \cdot \be_L + \be_I \cdot D(\be_L) - D(\be_I \cdot \be_L) = 0$ 
+
+\vspace{2mm}
+
+that $\sum\limits_S ( \lambda^P_{SL} d^S_I + \lambda^P_{IS} d^S_L - \lambda^S_{IL} d^P_S) = 0$ for any $P, I, L$.
+
+\vspace{2mm}
 
 \section{dim=2}
 
@@ -262,68 +325,81 @@ If $D(\beta_L) = \sum\limits_{S} d^S_L \beta_S = \sum\limits_{S} d_{SL} \beta_S$
 
 Denote
 
-$x_{15,17} =: a, ~~ x_{17,17} =: b, ~ x_{18,6} =: c, ~~
-x_{18,12} =: d, ~~ x_{18,17} =: e, ~ x_{18,18} =: f
+$x_{17,15} =: a, ~~ x_{17,17} =: b, ~ x_{18,12} =: c, ~~
+x_{18,15} =: d, ~~ x_{18,17} =: e, ~ x_{18,18} =: f
 $.
 
 \vspace{10mm}
 
 $\begin{smallmatrix}
- 0 & 2a & - 2c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & b & - d & a & - c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & 0 & f & 0 & a & - c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & 0 & 0 & 2b & - 2d & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & 0 & 0 & 0 & b + f & - d & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & 0 & 0 & 0 & e & 2f & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
- - a & 0 & 0 & 0 & 0 & 0 & - b & 2a & - 2c & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & - a & 0 & 0 & 0 & 0 & 0 & 0 & - d & a & - c & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & - b + f & 0 & a & - c & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & b & - 2d & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & f & - d & 0 & 0 & 0 & 0 & 0 & 0 \\
- 0 & 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & e & - b + 2f & 0 & 0 & 0 & 0 & 0 & 0 \\
- c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & - f & 2a & - 2c & 0 & 0 & 0 \\
- 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & b - f & - d & a & - c & 0 \\
- 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & 0 & 0 & a & - c \\
- 0 & 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & 2b - f & - 2d & 0 \\
- 0 & 0 & 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & 0 & b & - d \\
- 0 & 0 & 0 & 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & d & 0 & 0 & 0 & 0 & e & f \\
+ 0 & 0 & 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & - d & 0 & 0 & 0 & 0 & 0 \\
+ 2a & b & - c & 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & - d & 0 & 0 & 0 & 0 \\
+ 2d & e & f & 0 & 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & - d & 0 & 0 & 0 \\
+ 0 & a & 0 & 2b & - c & 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & - d & 0 & 0 \\
+ 0 & d & a & 2e & b + f & - 2c & 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & - d & 0 \\
+ 0 & 0 & d & 0 & e & 2f & 0 & 0 & 0 & 0 & 0 & - a & 0 & 0 & 0 & 0 & 0 & - d \\
+ 0 & 0 & 0 & 0 & 0 & 0 & - b & 0 & 0 & 0 & 0 & 0 & - e & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 2a & 0 & - c & 0 & 0 & 0 & 0 & - e & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 2d & e & - b + f & 0 & 0 & 0 & 0 & 0 & - e & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & a & 0 & b & - c & 0 & 0 & 0 & 0 & - e & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & d & a & 2e & f & - 2c & 0 & 0 & 0 & 0 & - e & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & d & 0 & e & - b + 2f & 0 & 0 & 0 & 0 & 0 & - e \\
+ 0 & 0 & 0 & 0 & 0 & 0 & c & 0 & 0 & 0 & 0 & 0 & - f & 0 & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & c & 0 & 0 & 0 & 0 & 2a & b - f & - c & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & c & 0 & 0 & 0 & 2d & e & 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & c & 0 & 0 & 0 & a & 0 & 2b - f & - c & 0 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & c & 0 & 0 & d & a & 2e & b & - 2c \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & c & 0 & 0 & d & 0 & e & f
 \end{smallmatrix}$
 
 \vspace{10mm}
 indices 1,2:
 $\begin{smallmatrix}
- 0 & 2a & 0 & 0 & 0 & 0 \\
- 0 & b & a & 0 & 0 & 0 \\
- 0 & 0 & 2b & 0 & 0 & 0 \\
- - a & 0 & 0 & - b & 2a & 0 \\
- 0 & - a & 0 & 0 & 0 & a \\
- 0 & 0 & - a & 0 & 0 & b \\
+ 0 & 0 & 0 & - a & 0 & 0 \\
+ 2a & b & 0 & 0 & - a & 0 \\
+ 0 & a & 2b & 0 & 0 & - a \\
+ 0 & 0 & 0 & - b & 0 & 0 \\
+ 0 & 0 & 0 & 2a & 0 & 0 \\
+ 0 & 0 & 0 & 0 & a & b \\
 \end{smallmatrix}$
 
 \vspace{10mm}
 
 indices 1,3:
 $\begin{smallmatrix}
- 0 & - 2c & 0 & 0 & 0 & 0 \\
- 0 & f & - c & 0 & 0 & 0 \\
- 0 & 0 & 2f & 0 & 0 & 0 \\
- c & 0 & 0 & - f & - 2c & 0 \\
- 0 & c & 0 & 0 & 0 & - c \\
- 0 & 0 & c & 0 & 0 & f \\
+ 0 & 0 & 0 & - d & 0 & 0 \\
+ 2d & f & 0 & 0 & - d & 0 \\
+ 0 & d & 2f & 0 & 0 & - d \\
+ 0 & 0 & 0 & - f & 0 & 0 \\
+ 0 & 0 & 0 & 2d & 0 & 0 \\
+ 0 & 0 & 0 & 0 & d & f \\
 \end{smallmatrix}$
 
-\vspace{10mm}
 
-indices 2,3:
-$\begin{smallmatrix}
- b & - 2d & 0 & 0 & 0 & 0 \\
- 0 & f & - d & 0 & 0 & 0 \\
- 0 & e & - b + 2f & 0 & 0 & 0 \\
- d & 0 & 0 & 2b - f & - 2d & 0 \\
- 0 & d & 0 & 0 & b & - d \\
- 0 & 0 & d & 0 & e & f \\
-\end{smallmatrix}$
+Again, let\\
+$ A = W(1,0,0,0,0,0)$,\\
+$ B = W(0,1,0,0,0,0)$,\\
+$ C = W(0,0,1,0,0,0)$,\\
+$ D = W(0,0,0,1,0,0)$,\\
+$ E = W(0,0,0,0,1,0)$,\\
+$ F = W(0,0,0,0,0,1)$.\\
+$ O = W(0,0,0,0,0,0)$.\\
 
+Then $A,B,C,D,E,F$ is a basis.
+
+\begin{center}
+\begin{tabular}{c|cccccc}
+  & A &  B & C   &  D &  E   & F \\
+ \hline
+A & 0 & -A & 0   &  0 & -D   & 0\\
+B & A &  0 & C   &  0 & -E   & 0\\
+C & 0 & -C & 0   & -A & -B+F & C\\
+
+D & 0 &  0 & A   &  0 &  0   & -D\\
+E & D &  E & B-F &  0 &  0   & -E\\
+F & 0 &  0 & -C  &  D &  E   & 0\\
+\end{tabular}
+\end{center}
 
 
 \end{document} 

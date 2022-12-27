@@ -48,10 +48,12 @@ def make_eq_system(data):
 
     for i, row in enumerate(rref0):
         i1, i2 = ind1to2(i)
-        
+        print(f"{i}({i1},{i2}): {row}")
+
         eq = ""
         count = 0
         for j, coef in enumerate(row):
+
             if coef != 0:
                 count += 1
                 j1, j2 = ind1to2(j)
@@ -64,6 +66,9 @@ def make_eq_system(data):
                     eq += " - {}*x[{},{}]".format(abs(coef), j1, j2)
                 else:
                     eq += " + {}*x[{},{}]".format(coef, j1, j2)
+
+                if j == 75:
+                    sys.exit()
         
         if count > 1:
             if i < num_d_ind or eq != "":
@@ -91,8 +96,8 @@ if __name__ == "__main__":
         #path = "rref_alpha_dim2.txt"
     elif dim == 3:
         #path = "rref.txt"
-        path = "rref_beta_dim3_reverse.txt"
-        #path = "rref_beta_dim3.txt"
+        #path = "rref_beta_dim3_reverse.txt"
+        path = "rref_beta_dim3.txt"
 
     data = load_data(path)
 

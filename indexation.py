@@ -84,7 +84,7 @@ def ind1to2(i):
 if __name__ == "__main__":
 
     for i in range(1, 19):
-        for j in range(1, 3):
+        for j in range(1, 19):
             K = ind2to1(i, j)
             (i1,j1) = ind1to2(K)
             assert (i,j == i1,j1)
